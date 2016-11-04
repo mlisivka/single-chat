@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  last_transition: MyString
+  provider: MyString
+  uid: MyString
+
+two:
+  email: MyString
+  last_transition: MyString
+  provider: MyString
+  uid: MyString
