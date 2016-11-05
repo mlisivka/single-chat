@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: :show
+  before_filter :authenticate_user!, only: [:index, :show]
 
   def index
     @users = User.all
@@ -10,6 +11,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    puts "-----------"
+    puts @user.inspect
+    puts "-----------"
     if @user.save
       log_in(@user)
       redirect_to @user

@@ -1,7 +1,5 @@
 class AuthenticationsController < ApplicationController
   
-  skip_before_filter :authenticate_user!
-  
   def facebook
     puts request.env["omniauth.auth"]
     @user = User.from_omniauth(request.env["omniauth.auth"])
