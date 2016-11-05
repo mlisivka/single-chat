@@ -4,11 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   
+  after_action :set_online
+  
   def log_in(user)
     session[:user_id] = user.id
+    set_online
   end
   
   def log_out
+    set_offline(session[:user_id])
     session.delete(:user_id)
     redirect_to root_path
   end
@@ -18,10 +22,25 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user!
-    puts session[:user_id]
     unless session[:user_id]
       redirect_to login_path
     end
+  end
+  
+  def online_users
+    $redis.keys
+  end
+  
+  private
+
+  def set_online
+    if current_user
+      $redis.set( current_user.id, nil, ex: 300 )
+    end
+  end
+  
+  def set_offline(user_id)
+    $redis.del(user_id)
   end
     
 end

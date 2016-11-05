@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
-  
+
   def self.from_omniauth(auth)
-    puts "-------"
-    puts auth.info
-    puts "-------"
+  
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.provider = auth.provider
       user.uid = auth.uid
@@ -14,6 +12,10 @@ class User < ActiveRecord::Base
       end
       user.save!
     end
+  end
+  
+  def online?
+    $redis.exists(self.id)
   end
   
 end

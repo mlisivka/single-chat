@@ -15,10 +15,8 @@ ActiveRecord::Schema.define(version: 20161104155116) do
 
   create_table "users", force: true do |t|
     t.string   "email"
-    t.string   "last_transition"
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "online"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'omniauth-facebook'
 gem 'omniauth-vk'
+gem 'redis'
+gem 'hiredis'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
