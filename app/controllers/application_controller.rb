@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
   
   def log_out
-    set_offline(session[:user_id])
+    set_offline
     session.delete(:user_id)
     redirect_to root_path
   end
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
   
   def authenticate_user!
-    unless session[:user_id]
+    unless current_user
       redirect_to login_path
     end
   end
@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def set_offline(user_id)
-    $redis.del(user_id)
+  def set_offline
+    $redis.del(session[:user_id])
   end
     
 end

@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @message = Message.all
   end
 
   def create

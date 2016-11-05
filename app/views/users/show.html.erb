@@ -8,7 +8,14 @@
 		<div class="message-body">asd</div>
 	</div>
 </div>
-<form>
-	<input type="text" class="text-field" placeholder="Write your message here..." name="text" size="40"></div>
-	<input type="submit" value="Отправить" name="asd">
-</form>
+<% @message.each do |m| %>
+  <% if (m.sender == current_user && m.recipient == User.find(params[:id])) || (m.sender == User.find(params[:id]) && m.recipient == current_user) %>
+		<strong><%= m.sender.email %>:</strong>
+		<%= m.body %>
+	<% end %>
+<% end %>
+<%= form_tag('/messages', method: :post) do %>
+	<%= text_field_tag :body, nil, class: "text-field", placeholder: "Write your message here...", size: "40" %>
+	<%= hidden_field_tag 'recipient', params[:id] %>
+	<%= submit_tag "Send message" %>
+<% end %>
