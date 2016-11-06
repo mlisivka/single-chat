@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :users
-  post '/messages', to: 'messages#create'
+  post '/users/:id/messages', to: 'messages#create', as: :create_message
 
   root 'users#index'
   get    '/signup',  to: 'users#new'

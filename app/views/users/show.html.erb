@@ -1,17 +1,11 @@
 <div class="chat">
-	<% @message.each do |m| %>
-		<% if (m.sender == current_user && m.recipient == User.find(params[:id])) || (m.sender == User.find(params[:id]) && m.recipient == current_user) %>
-			<div class="message">
-				<div class="message-title"><%= m.sender.email %>:</div>
-				<div class="message-body"><%= m.body %></div>
-			</div>
-		<% end %>
-	<% end %>
+	<%= sync partial: 'message_row', collection: @messages %>
+	<%= sync_new partial: 'message_row', resource: Message.new %>
 </div>
 
 
-<%= form_tag('/messages', method: :post,class:"form-chat") do %>
-	<%= text_field_tag :body, nil, class: "text-field", placeholder: "Write your message here...", size: "40" %>
-	<%= hidden_field_tag 'recipient', params[:id] %>
-	<%= submit_tag "Send message",class: "btn-message" %>
+<%= form_for Message.new, url: :create_message, html: { class: "form-chat" }, remote: true do |f| %>
+	<%= f.text_field :body, class: "text-field", placeholder: "Write your message here...", size: "40" %>
+	<%= f.hidden_field :recipient, value: params[:id] %>
+	<%= f.submit "Send message", class: "btn-message" %>
 <% end %>
