@@ -1,15 +1,65 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
  *= require_tree .
  *= require_self
  */
+.user-status{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
+.online{
+	background-color: #ff0;
+}
+.offline{
+	background-color: #33d;
+}
+.user{
+	overflow: hidden;
+	width: 60%;
+	padding: 5px;
+	border: solid 1px #ccc;
+	margin-left: 20%;
+	margin-top: 20px;
+}
+.row{
+	float: left;
+}
+.btn-chat{
+	float: right;
+}
+.chat{
+	margin: 15px 20%;
+	border: solid 1px #ccc;
+	width: 60%;
+	padding: 5px;
+	min-height: 70px;
+}
+.user-email{
+	margin-left: 25px;
+}
+.message{
+	border: solid 1px #ccc;
+	height: 60px;
+	padding: 5px;
+	margin: 5px;
+}
+.text-field{
+	width: calc(100% + 8px);
+	line-height: 25px;
+	font-size: 18px;
+}
+.form-chat{
+	padding: 0 20%;
+}
+.btn-message{
+	width: calc(100% + 13px);
+	margin-top: 5px;
+}
+.sign-in-area{
+	float:left;
+	padding-left: 25%;
+}
+.sign-up-area{
+  padding-left: 25%;
+  float: left;
+}

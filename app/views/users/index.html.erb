@@ -1,7 +1,13 @@
 <h1>Listing users</h1>
-<% @users.each do |user| %>
-	<div class="user">
-		<div class="row user-status"><%= user.online? %></div>
-		<div class="row btn"><%= link_to 'open chat', user %></div>
+	<% @users.each do |user| %>
+		<div class="user">
+			<% if user.online? %>
+				<div class="row user-status online">
+			<% else %>
+				<div class="row user-status offline">
+			<% end %>
+			<div class="user-email"><%= user.email %></div>
+		</div>
+		<div class="row btn-chat"><%= link_to 'open chat', user %></div>
 	</div>
 <% end %>

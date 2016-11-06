@@ -1,21 +1,17 @@
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
 <div class="chat">
-	<div class="message">
-		<div class="message-title">Name</div>
-		<div class="message-body">asd</div>
-	</div>
-</div>
-<% @message.each do |m| %>
-  <% if (m.sender == current_user && m.recipient == User.find(params[:id])) || (m.sender == User.find(params[:id]) && m.recipient == current_user) %>
-		<strong><%= m.sender.email %>:</strong>
-		<%= m.body %>
+	<% @message.each do |m| %>
+		<% if (m.sender == current_user && m.recipient == User.find(params[:id])) || (m.sender == User.find(params[:id]) && m.recipient == current_user) %>
+			<div class="message">
+				<div class="message-title"><%= m.sender.email %>:</div>
+				<div class="message-body"><%= m.body %></div>
+			</div>
+		<% end %>
 	<% end %>
-<% end %>
-<%= form_tag('/messages', method: :post) do %>
+</div>
+
+
+<%= form_tag('/messages', method: :post,class:"form-chat") do %>
 	<%= text_field_tag :body, nil, class: "text-field", placeholder: "Write your message here...", size: "40" %>
 	<%= hidden_field_tag 'recipient', params[:id] %>
-	<%= submit_tag "Send message" %>
+	<%= submit_tag "Send message",class: "btn-message" %>
 <% end %>
