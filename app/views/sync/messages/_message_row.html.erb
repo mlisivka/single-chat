@@ -1,7 +1,4 @@
-
-		<% if (message.sender == current_user && message.recipient == User.find(params[:id])) || (message.sender == User.find(params[:id]) && message.recipient == current_user) %>
-			<div class="message">
-				<div class="message-title"><%= message.sender.email %>:</div>
-				<div class="message-body"><%= message.body %></div>
-			</div>
-		<% end %>
+<div class="message">
+	<div class="message-title"><%= message.sender.email %>:</div>
+	<div class="message-body"><%= message.body %></div>
+</div>

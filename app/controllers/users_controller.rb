@@ -3,14 +3,17 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, only: [:index, :show]
   
   respond_to :html, :js
+  
+  layout 'application'
 
   def index
     @users = User.where("id != ?", current_user.id)
   end
 
   def show
-    @messages = Message.all
-    @new_message = Message.new
+    mess1 = Message.where(sender_id: current_user.id, recipient_id: params[:id].to_i)
+    mess2 = Message.where(sender_id: params[:id].to_i, recipient_id: current_user.id)
+    @messages = (mess1 + mess2).sort_by{|e| e[:created_at]}
   end
 
   def create
@@ -23,18 +26,10 @@ class UsersController < ApplicationController
     end
   end
   
-  def create_message
-    @message = current_user.messages.build(message_params)
-    @message.sender    = current_user
-    @message.recipient = User.find(params[:message][:recipient])
-
-    if @message.save
-      sync_new @message
-    end
-    
-    render "show"
-    #respond_with @message, location: request.referer
-
+  def check_online
+    @users = User.where("id != ?", current_user.id)
+    @online = online_users
+    respond_to :js
   end
 
   private

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   get    '/logout',  to: 'sessions#destroy'
   
+  get 'check_online', to: 'users#check_online'
+  
   get '/auth/:action/callback', to: "authentications", constraints: { action: /facebook|vk/ }
 
   # The priority is based upon order of creation: first created -> highest priority.

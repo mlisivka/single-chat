@@ -1,13 +1,13 @@
-<h1>Listing users</h1>
-	<% @users.each do |user| %>
-		<div class="user">
-			<% if user.online? %>
-				<div class="row user-status online">
-			<% else %>
-				<div class="row user-status offline">
-			<% end %>
-			<div class="user-email"><%= user.email %></div>
-		</div>
-		<div class="row btn-chat"><%= link_to 'open chat', user %></div>
-	</div>
-<% end %>
+<div id="all_users">
+	<%= render partial: "check_online" %>
+</div>
+<script>
+	worker();
+	function worker() { 
+	  $.ajax({
+	    url: '/check_online',
+			dataType: "script"
+	  });
+		window.setTimeout(function(){	worker();	}, 10000);
+	}
+</script>
