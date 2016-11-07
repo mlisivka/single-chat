@@ -57,9 +57,9 @@
 }
 .sign-in-area{
 	float:left;
-	padding-left: 25%;
+	padding-left: 27%;
 }
 .sign-up-area{
-  padding-left: 25%;
-  float: left;
+  float: right;
+  padding-right: 27%;
 }
